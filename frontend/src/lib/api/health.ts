@@ -1,6 +1,7 @@
 export async function checkHealth(): Promise<string> {
 	try {
-		const res = await fetch(`${import.meta.env.VITE_API_URL}/health`);
+		const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
+		const res = await fetch(`${apiUrl}/health`);
 		if (!res.ok) throw new Error('Bad response');
 		return await res.text();
 	} catch (e) {

@@ -6,10 +6,11 @@
     }
 </script>
 
-<button on:click={handleClick} class="border p-2 rounded bg-blue-500 text-white hover:bg-blue-600">
-    Check Backend Health
-</button>
+<div class="flex flex-col items-center gap-4">
+    <button on:click={handleClick} type="button" class="btn preset-tonal-primary hover:preset-tonal">Check Backend Health</button>
+</div>
 
 {#if status}
     <p class="mt-4 text-lg">Health Status: {status}</p>
 {/if}
+
