@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
 use tracing_subscriber;
 use tokio::net::TcpListener;
-
+use tower_http::cors::{Any, CorsLayer};
 
 #[derive(Debug, Serialize, Deserialize)]
 struct BookRequest {
@@ -38,11 +38,16 @@ async fn create_request(Json(payload): Json<BookRequest>) -> Json<BookRequest> {
 
 #[tokio::main]
 async fn main() {
+    
     tracing_subscriber::fmt::init();
+    
+    let cors = CorsLayer::new().allow_origin(Any);
+    
 
     let app = Router::new()
         .route("/health", get(healthcheck))
-        .route("/requests", get(list_requests).post(create_request));
+        .route("/requests", get(list_requests).post(create_request))
+        .layer(cors);
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     let listener = TcpListener::bind(addr).await.unwrap();
