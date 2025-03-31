@@ -25,15 +25,30 @@
 		<Calendar size={20} />
 		<CircleUser size={20} />
 	{/snippet}
-
+<!-- 
 	{#snippet headline()}
 		<div class="flex items-center gap-4">
 			<h2 class="h2">Bookseerr</h2>
 			<RequestButton />
 
 		</div>
-	{/snippet}
-	<span> Bookseerr </span>
+	{/snippet} -->
+	<div class="flex items-center justify-between w-full gap-4">
+		<!-- Left: Title + Search -->
+		<div class="flex items-center gap-4 flex-grow">
+			<span class="text-xl font-semibold">Bookseerr</span>
+	
+			<!-- Optional Search Bar -->
+			<input
+				type="text"
+				placeholder="Search books..."
+				class="input input-sm w-full max-w-xs"
+			/>
+		</div>
+	
+		<!-- Right: Request Button -->
+		<RequestButton />
+	</div>
 </AppBar>
 <hr class="hr" />
 
