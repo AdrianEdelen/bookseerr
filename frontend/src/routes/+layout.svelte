@@ -60,7 +60,7 @@
 					<Navigation.Tile id="pendingRequests" labelExpanded="Pending Requests">
 						<Video size={20} />
 					</Navigation.Tile>
-					<Navigation.Tile id="discover" labelExpanded="Discover" href="/files">
+					<Navigation.Tile id="discover" labelExpanded="Discover" href="/discover/trending">
 						<Music size={20} />
 					</Navigation.Tile>
 					<Navigation.Tile id="admin" labelExpanded="Admin" href="/admin">
