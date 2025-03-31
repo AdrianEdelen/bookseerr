@@ -54,8 +54,11 @@
 		<div class="bg-surface-2 border-border border-r">
 			<Navigation.Rail expanded={isExpansed}>
 				{#snippet tiles()}
-					<Navigation.Tile id="UserRequests" labelExpanded="Your Requests" href="/requests">
+					<Navigation.Tile id="userRequests" labelExpanded="Your Requests" href="/requests">
 						<Folder size={20} />
+					</Navigation.Tile>
+					<Navigation.Tile id="pendingRequests" labelExpanded="Pending Requests">
+						<Video size={20} />
 					</Navigation.Tile>
 					<Navigation.Tile id="discover" labelExpanded="Discover" href="/files">
 						<Music size={20} />
@@ -63,9 +66,7 @@
 					<Navigation.Tile id="admin" labelExpanded="Admin" href="/admin">
 						<Image size={20} />
 					</Navigation.Tile>
-					<Navigation.Tile id="item4" labelExpanded="item 4">
-						<Video size={20} />
-					</Navigation.Tile>
+					
 				{/snippet}
 				{#snippet footer()}
 					<Navigation.Tile id="info" labelExpanded="Settings">
