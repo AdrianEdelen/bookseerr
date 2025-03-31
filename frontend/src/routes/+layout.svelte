@@ -1,65 +1,84 @@
 <script lang="ts">
 	import '../app.css';
 	import { AppBar, Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { GitBranch, ArrowLeft, Paperclip, Calendar, CircleUser,
-		Image, Music, Video, Folder, Menu
-	}  from 'lucide-svelte';
+	import {
+		GitBranch,
+		ArrowLeft,
+		Paperclip,
+		Calendar,
+		CircleUser,
+		Image,
+		Music,
+		Video,
+		Folder,
+		Menu,
+		BookUser,
+		Settings
+	} from 'lucide-svelte';
 	import RequestButton from '$lib/components/RequestButton.svelte';
 
 	let { children } = $props();
 	let value = $state('files');
 	let isExpansed = $state(true);
-	function toggleExpanded() {
-    	isExpansed = !isExpansed;
-  	}
 </script>
 
-
-
-
-<AppBar> 
-	{#snippet trail()}
-		<a href="https://github.com/AdrianEdelen/bookseerr" target="_blank" rel="noopener noreferrer" class="hover:opacity-40">
-			<GitBranch size={20} />
-		</a>
-		<Calendar size={20} />
-		<CircleUser size={20} />
-	{/snippet}
-
-	<div class="flex items-center justify-between w-full gap-4">
-		<div class="flex items-center gap-4 flex-grow">
-			<span class="text-xl font-semibold">Bookseerr</span>
-			<input
-				type="text"
-				placeholder="Search books..."
-				class="input input-sm w-full max-w-xs"
-			/>
-		</div>
-		<RequestButton />
-	</div>
-</AppBar>
-<hr class="hr" />
-
-<div class="card border-surface-100-900 w-full grid-cols-[auto_1fr] border-[1px]">
-	<!-- Component -->
-	<Navigation.Rail expanded={isExpansed}>
-		{#snippet header()}
-			<Navigation.Tile labelExpanded="Menu" onclick={toggleExpanded} title="Toggle Menu Width">
-				<Menu />
-			</Navigation.Tile>
+<div class="flex h-screen flex-col">
+	<AppBar>
+		{#snippet trail()}
+			<div class="flex h-full items-center gap-4">
+				<a
+					href="https://github.com/AdrianEdelen/bookseerr"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:opacity-40"
+				>
+					<GitBranch size={20} />
+				</a>
+				<Calendar size={20} />
+				<CircleUser size={20} />
+			</div>
 		{/snippet}
-		{#snippet tiles()}
-			<Navigation.Tile id="files" label="Files"><Folder /></Navigation.Tile>
-			<Navigation.Tile id="images" label="Images"><Image /></Navigation.Tile>
-			<Navigation.Tile id="music" label="Music"><Music /></Navigation.Tile>
-			<Navigation.Tile id="videos" label="Videos"><Video /></Navigation.Tile>
-	  	{/snippet}
-	</Navigation.Rail>
-	<!-- Content -->
-	<div class="flex items-center justify-center">
-	  <pre class="pre">value: {value}</pre>
+
+		<div class="flex w-full items-center justify-between gap-4">
+			<div class="flex flex-grow items-center gap-4">
+				<span class="text-xl font-semibold">Bookseerr</span>
+				<input type="text" placeholder="Search books..." class="input input-sm w-full max-w-xs" />
+			</div>
+			<RequestButton />
+		</div>
+	</AppBar>
+
+	<hr class="hr" />
+
+	<div class="flex flex-1 overflow-hidden">
+		<div class="bg-surface-2 border-border border-r">
+			<Navigation.Rail expanded={isExpansed}>
+				{#snippet tiles()}
+					<Navigation.Tile id="UserRequests" labelExpanded="Your Requests" href="/requests">
+						<Folder size={20} />
+					</Navigation.Tile>
+					<Navigation.Tile id="discover" labelExpanded="Discover" href="/files">
+						<Music size={20} />
+					</Navigation.Tile>
+					<Navigation.Tile id="admin" labelExpanded="Admin" href="/admin">
+						<Image size={20} />
+					</Navigation.Tile>
+					<Navigation.Tile id="item4" labelExpanded="item 4">
+						<Video size={20} />
+					</Navigation.Tile>
+				{/snippet}
+				{#snippet footer()}
+					<Navigation.Tile id="info" labelExpanded="Settings">
+						<Settings />
+					</Navigation.Tile>
+				{/snippet}
+			</Navigation.Rail>
+		</div>
+
+		<main class="flex-1 overflow-auto p-6">
+			{@render children()}
+		</main>
 	</div>
-  </div>
-	
-{@render children()}
-	
+</div>
+
+<!-- {@render children()} -->
